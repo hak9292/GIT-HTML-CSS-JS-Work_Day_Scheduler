@@ -1,42 +1,43 @@
 // get current date
-var currentDate = moment().format("dddd, MMMM Do YYYY");
-// console.log(currentDate);
-// put in timeblocks in html
-    //use rows and columns--
-// jquery set text
-$("#currentDay").text(currentDate);
+$(document).ready(function () {
+    $('#9 .desc').val(localStorage.getItem('9'));
+    $('#10 .desc').val(localStorage.getItem('10'));
+    $('#11 .desc').val(localStorage.getItem('11'));
+    $('#12 .desc').val(localStorage.getItem('12'));
+    $('#13 .desc').val(localStorage.getItem('13'));
+    $('#14 .desc').val(localStorage.getItem('14'));
+    $('#15 .desc').val(localStorage.getItem('15'));
+    $('#16 .desc').val(localStorage.getItem('16'));
+    $('#17 .desc').val(localStorage.getItem('17'));
 
 
 
+    for (i = 9; i < 15; i++){
+        var currentHour = moment().hours();
+        var boxHour = i;
+        if (currentHour > boxHour) {
+            $(`.desc #${i}`).removeClass('box');
+            $(`.desc #${i}`).addClass('past');
+        } 
+    }
 
 
 
+    let saveBtnEl = $('.saveBtn');
+    saveBtnEl.on('click', function () {
+        // get nearby values
+        var value = $(this).siblings('.desc').val();
+        var time = $(this).parent().attr('id');
+        // save in localStorage
+        localStorage.setItem(time, value);
 
 
+    var currentDate = moment().format("dddd, MMMM Do YYYY");
 
+    $("#currentDay").text(currentDate);
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+});
 // previous attempt at generating timeboxes with js
 // var containerEl = $("#container")
 // var rowEl = $("#row1");
@@ -46,7 +47,7 @@ $("#currentDay").text(currentDate);
 //     $(timesEl).text(i);
 //     $(rowEl).clone().appendTo(containerEl);
 //     console.log(i); 
-    // 
+    //
     // let i = 0;
 // }
 // var x = document.getElementById("container");
@@ -67,4 +68,3 @@ $("#currentDay").text(currentDate);
 // var timeBlocks = $(body.container.col-1);
 // for (let i = 9; i < 12; i += 1) {
 //     $("timeBlocks").text(`${i}AM`)
-// }
